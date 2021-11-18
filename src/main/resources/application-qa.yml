@@ -1,0 +1,4 @@
+com:
+  username: superuserQA
+  password: passwordQA
+  jdbcurl: url

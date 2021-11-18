@@ -1,6 +1,11 @@
 package guru.springframework.sfgdi.config;
 
+import com.springframework.pets.CatPetService;
+import com.springframework.pets.DogPetService;
+import com.springframework.pets.PetServicesFactory;
+import guru.springframework.sfgdi.datasource.FakeDataSource;
 import guru.springframework.sfgdi.services.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -12,6 +17,31 @@ import org.springframework.context.annotation.Profile;
  */
 @Configuration
 public class GreetingServiceConfig {
+    @Bean
+    FakeDataSource fakeDataSource(SFGConfig sfgConfig) {
+        FakeDataSource fakeDataSource = new FakeDataSource();
+        fakeDataSource.setUsername(sfgConfig.getUsername());
+        fakeDataSource.setPassword(sfgConfig.getPassword());
+        fakeDataSource.setJdbcurl(sfgConfig.getJdbcurl());
+        return fakeDataSource;
+    }
+
+    @Bean
+    PetServicesFactory petServicesFactory() {
+        return new PetServicesFactory();
+    }
+
+    @Profile("cat")
+    @Bean
+    CatPetService catPetService(PetServicesFactory petServicesFactory) {
+        return (CatPetService) petServicesFactory.getPetService("cat");
+    }
+
+    @Profile({"dog", "default"})
+    @Bean
+    DogPetService dogPetService(PetServicesFactory petServicesFactory) {
+        return (DogPetService) petServicesFactory.getPetService("dog");
+    }
 
     @Profile({"ES", "default"})
     @Bean("i18nService")

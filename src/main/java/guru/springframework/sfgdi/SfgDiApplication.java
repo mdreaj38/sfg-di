@@ -1,6 +1,8 @@
 package guru.springframework.sfgdi;
 
+import guru.springframework.sfgdi.config.SFGConfig;
 import guru.springframework.sfgdi.controllers.*;
+import guru.springframework.sfgdi.datasource.FakeDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -36,6 +38,17 @@ public class SfgDiApplication {
 		System.out.println("-------- Constructor" );
 		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.getGreeting());
+
+		System.out.println("-------FakeDataSource");
+		FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
+		System.out.println(fakeDataSource.getUsername());
+		System.out.println(fakeDataSource.getPassword());
+
+		System.out.println("-----config properties bean");
+
+		SFGConfig sfgConfig = ctx.getBean(SFGConfig.class);
+		System.out.println(sfgConfig.getUsername());
+		System.out.println(sfgConfig.getPassword());
 	}
 
 }

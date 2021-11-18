@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active:
+     - cat
+     - EN
+     - prod
+com:
+  username: superuser
+  password: password
+  jdbcurl: url
+---
+spring:
+  profiles: prod
+com:
+  username: superuserPROD
+  password: passwordPROD
+  jdbcurl: url
