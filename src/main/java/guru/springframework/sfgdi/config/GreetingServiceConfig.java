@@ -5,7 +5,7 @@ import com.springframework.pets.DogPetService;
 import com.springframework.pets.PetServicesFactory;
 import guru.springframework.sfgdi.datasource.FakeDataSource;
 import guru.springframework.sfgdi.services.*;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Profile;
  * @author rejaul.reaj
  * @since 11/18/21
  */
+@EnableConfigurationProperties(SfgConstructorConf.class)
 @Configuration
 public class GreetingServiceConfig {
     @Bean

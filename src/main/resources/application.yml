@@ -4,14 +4,14 @@ spring:
      - cat
      - EN
      - prod
-com:
+guru:
   username: superuser
   password: password
   jdbcurl: url
 ---
 spring:
   profiles: prod
-com:
+guru:
   username: superuserPROD
   password: passwordPROD
   jdbcurl: url
